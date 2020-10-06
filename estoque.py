@@ -1,6 +1,6 @@
 import mysql.connector    #Importa a biblioteca para conexao com o mysql
 
-# Stevan Stetz Vanin - UFSCar AUTOMAÇÃO INDUSTRIAL 2020
+# MADE BY Stevan Stetz Vanin - UFSCar AUTOMAÇÃO INDUSTRIAL 2020
 # DB_NAME = estoque ; TABLE = itens ; COLUMNS_NAME = ID, NOME, PRECO, QTD
 
 def inserir(cursor, db_connection):
