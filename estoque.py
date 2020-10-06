@@ -39,16 +39,20 @@ def atualizarpreco(cursor, db_connection):
     print(" Preço atualizado com sucesso.")
     db_connection.commit()
 
-def drop(cursor):
+def drop(cursor, db_connection):
     confirmar = input("\n Tem certeza que deseja apagar todos os dados? não será possível recuperá-los. Sim/Não : ")
     if confirmar.lower().strip() == "sim":
         cursor.execute("DELETE FROM itens")
+        db_connection.commit()
         print(" Dados apagados com sucesso.")
 
 def main(MY_HOST, MY_USER, MY_PASSWORD, MY_DATABASE):
+
     db_connection = mysql.connector.connect(host=MY_HOST, user=MY_USER, password=MY_PASSWORD, database=MY_DATABASE)
     cursor = db_connection.cursor()
+
     cursor.execute("CREATE TABLE IF NOT EXISTS itens (ID INTEGER PRIMARY KEY AUTO_INCREMENT, NOME VARCHAR(20) NOT NULL, PRECO INTEGER NOT NULL, QTD INTEGER NOT NULL)")
+
     while True:
         opt = input("\n1 - Inserir item no banco de dados\n2 - Atualizar a quantidade de estoque de um item\n3 - Consultar todos os itens no banco de dados\n4 - Atualizar o preço de um item\n5 - Sair\n6 - Apagar TODOS os itens do estoque\n Selecione a opção que deseja: ")
         if opt == '1':
@@ -62,8 +66,8 @@ def main(MY_HOST, MY_USER, MY_PASSWORD, MY_DATABASE):
         elif opt == '5':
             break
         elif opt == '6':
+            # drop(cursor, db_connection)
             print(" Opção desabilitada.")
-            # drop(cursor)
         else:
             print("\n Opção inválida.")
 
